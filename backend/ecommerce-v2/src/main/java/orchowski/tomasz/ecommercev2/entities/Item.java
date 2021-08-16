@@ -16,6 +16,7 @@ import java.util.UUID;
 public class Item {
 
     @Id
+    @GeneratedValue(generator = "UUID")
     private UUID uuid;
 
 
@@ -28,12 +29,16 @@ public class Item {
     @NotNull
     private String mainPhotoUrl;
 
+    @NotNull
+    @Lob
+    private String description;
+
+    @Singular
     @ElementCollection
     @CollectionTable(
             name = "ITEM_PHOTO"
     )
     private List<String> photos;
-
 
 
 }

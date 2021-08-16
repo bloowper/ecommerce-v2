@@ -7,10 +7,7 @@ import orchowski.tomasz.ecommercev2.services.ItemService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${api.prefix}")
@@ -21,8 +18,15 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/items")
-    Page<Item> getItems() {
+    Page<Item> getItems(
+            @RequestAttribute(required = true) long page,
+            @RequestAttribute(required = true) long pageSize,
+            @RequestAttribute(required = false) String sortBy,
+            @RequestAttribute(required = false) String sortDirection
+    ) {
+
         log.info(String.format(""));
-        return itemService.findAll(1, 10,"title", Sort.Direction.ASC);
+        Page<Item> items = itemService.findAll(0, 10, "title", Sort.Direction.ASC);
+        return items;
     }
 }

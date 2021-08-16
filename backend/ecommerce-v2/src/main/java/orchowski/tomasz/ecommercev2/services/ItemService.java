@@ -14,7 +14,7 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
 
-   public Page<Item> findAll(Integer page, Integer size, String sortBy, Sort.Direction direction) {
+    public Page<Item> findAll(Integer page, Integer size, String sortBy, Sort.Direction direction) {
 
        PageRequest pageRequest;
        if (direction == Sort.Direction.ASC) {
@@ -24,6 +24,10 @@ public class ItemService {
        }
 
        return itemRepository.findAll(pageRequest);
+    }
+
+    public Item save(Item item) {
+        return itemRepository.save(item);
     }
 
 }
