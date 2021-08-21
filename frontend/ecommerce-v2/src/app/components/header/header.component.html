@@ -1,10 +1,12 @@
 <mat-toolbar>
     <span>{{websiteName}}</span>
 
-    <button mat-button routerLink="/homepage" routerLinkActive="mat-accent">Homepage</button>
-    <button mat-button>Buy</button>
+    <button mat-button routerLink="/homepage" routerLinkActive="mat-accent">home page</button>
+    <button mat-button routerLink="shop" routerLinkActive="mat-accent">shop</button>
 
     <span class="spacer"></span>
-    <button mat-raised-button color="primary">Sign Up</button>
-
+    <button  mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+        <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <button class="leftmargin" mat-raised-button color="primary">Sign Up</button>
 </mat-toolbar>

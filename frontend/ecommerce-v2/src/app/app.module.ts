@@ -9,25 +9,34 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import { Routes, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { ListOfCardsComponent } from './components/list-of-cards/list-of-cards.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import {MatIconModule} from "@angular/material/icon";
+import { ItemComponent } from './components/buy/item/item.component';
+import { BuySubpageComponent } from './components/buy/buy-subpage/buy-subpage.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ListOfCardsComponent,
-    HomepageComponent
+    HomepageComponent,
+    ItemComponent,
+    BuySubpageComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    RouterModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        RouterModule,
+        AppRoutingModule,
+        MatIconModule,
+        MatCardModule,
+        MatPaginatorModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

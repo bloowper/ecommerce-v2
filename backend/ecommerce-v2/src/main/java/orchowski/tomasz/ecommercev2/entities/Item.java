@@ -31,6 +31,10 @@ public class Item {
 
     @NotNull
     @Lob
+    private String shortDescription;
+
+    @NotNull
+    @Lob
     private String description;
 
     @Singular
