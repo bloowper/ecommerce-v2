@@ -9,25 +9,26 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import { Routes, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { ListOfCardsComponent } from './components/list-of-cards/list-of-cards.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import {MatIconModule} from "@angular/material/icon";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ListOfCardsComponent,
     HomepageComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    RouterModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        RouterModule,
+        AppRoutingModule,
+        MatIconModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
