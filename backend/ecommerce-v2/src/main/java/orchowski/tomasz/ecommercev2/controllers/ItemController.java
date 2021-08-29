@@ -13,20 +13,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("${api.prefix}")
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class ItemController {
 
     private final ItemService itemService;
 
     @GetMapping("/items")
     Page<Item> getItems(
-            @RequestAttribute(required = true) long page,
-            @RequestAttribute(required = true) long pageSize,
-            @RequestAttribute(required = false) String sortBy,
-            @RequestAttribute(required = false) String sortDirection
+            @RequestParam(required = true) int page,
+            @RequestParam(required = false, defaultValue = "16") int pageSize,
+            @RequestParam(required = false,defaultValue = "title") String sortBy,
+            @RequestParam(required = false,defaultValue = "ASC") String sortDirection
     ) {
+        log.debug(String.format("pageSize %s sortBy %s sortDirection %s", pageSize, sortBy, sortDirection));
+        Sort.Direction direction;
+        if (sortDirection.equalsIgnoreCase("DESC")) {
+            direction = Sort.Direction.DESC;
+        } else {
+            direction = Sort.Direction.ASC;
+        }
 
-        log.info(String.format(""));
-        Page<Item> items = itemService.findAll(0, 10, "title", Sort.Direction.ASC);
+        Page<Item> items = itemService.findAll(page, pageSize, sortBy, direction);
         return items;
     }
 }

@@ -3,21 +3,27 @@ package orchowski.tomasz.ecommercev2.bootstrap.developmentBeans;
 import lombok.RequiredArgsConstructor;
 import lombok.Singular;
 import lombok.extern.slf4j.Slf4j;
+import orchowski.tomasz.ecommercev2.entities.Item;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
+/**
+ * Bean for generating random Item entities for testing and development purpose.
+ * profile: development
+ */
 @Profile("development")
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class ItemLoremIpsum {
 
-    String[] title = {
+    private String[] title = {
             "dolorum rerum totam",
             "cum eligendi magni",
             "nihil vitae",
@@ -27,14 +33,14 @@ public class ItemLoremIpsum {
             "eos atque",
     };
 
-    String[] subTitle = {
+    private String[] subTitle = {
             "corrupti exercitationem assumenda cum qui. ",
             " temporibus provident nemo.",
             "Soluta minima in quia ex autem quia.",
             "nemo nostrum adipisci",
     };
 
-    String[] mainPhotoUrl = {
+    private String[] mainPhotoUrl = {
             "https://dummyimage.com/432x345.6/000/ffffff",
             "https://dummyimage.com/432x345.6/000/ffffff",
             "https://dummyimage.com/432x345.6/362e36/ffffff",
@@ -42,7 +48,7 @@ public class ItemLoremIpsum {
             "https://dummyimage.com/432x345.6/4ea100/ffffff",
     };
 
-    String[] shortDescription = {
+    private String[] shortDescription = {
             "At quia iure aut itaque modi quas esse. Ut magnam fugiat at quia possimus amet atque necessitatibus. Accusamus non in pariatur omnis dolores. Qui provident quae sunt. Aut dolor nobis temporibus eum. Molestiae cupiditate facere ut magni.",
             "Omnis ut libero aliquam velit. Quas est accusantium esse ut occaecati atque natus aut. Nobis facere nam et dignissimos. Atque voluptas cumque consequatur at error deserunt ut. Tempore vero ut et fugit molestias consectetur. Et quia vero voluptatibus asperiores deserunt officia aperiam.",
             "Suscipit assumenda id illo qui amet eum. Fuga vel enim mollitia nisi facere eligendi in. Nostrum ratione omnis aut ut sed voluptatem. Dicta est non et expedita.",
@@ -50,7 +56,7 @@ public class ItemLoremIpsum {
             "Nobis et molestias provident nobis sit deserunt ipsum voluptate. Quis voluptas esse illum. Incidunt est earum tenetur sed odio ipsum. Consequatur est qui fuga perferendis sed illum eum occaecati.",
     };
 
-    String[] description = {
+    private String[] description = {
             "Qui rerum voluptatibus commodi dicta beatae. Error expedita porro ex sunt dolorem. Similique quis et amet voluptas quia excepturi temporibus eos. Atque et saepe non ea asperiores quam.\n" +
                     "\n" +
                     "Blanditiis temporibus voluptas doloribus aperiam sed aspernatur. Vel ut officiis provident vel corrupti. Quibusdam dolore ab consequatur deleniti sunt velit. Quidem aliquam non voluptates earum corporis unde. Omnis eaque sit sint est.\n" +
@@ -79,43 +85,30 @@ public class ItemLoremIpsum {
                     "Saepe aliquam quidem inventore aut. Ut vel odit eaque aut non nemo eveniet ut. Ab nulla voluptatibus repellat aperiam voluptatem laborum delectus. Sed aspernatur quibusdam nesciunt suscipit aut eaque quia qui. Deleniti qui minima perferendis culpa amet nobis modi.",
     };
 
-    String[] photos = {
-            "",
-            "",
-            "",
-            "",
-            "",
+    private String[] photos = {
+            "https://m.media-amazon.com/images/I/71IVTMa5JQL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/81AbJXWCxXL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/81aYGtq0joL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/41YubR1jprS._AC_SL1024_.jpg",
     };
 
+    public Item generateRandomItem() {
+        Random random = new Random();
+        Item.ItemBuilder builder = Item.builder();
+        builder.title(title[random.nextInt(title.length)]);
+        builder.subTitle(subTitle[random.nextInt(subTitle.length)]);
+        builder.mainPhotoUrl(mainPhotoUrl[random.nextInt(mainPhotoUrl.length)]);
+        builder.shortDescription(shortDescription[random.nextInt(shortDescription.length)]);
+        builder.description(description[random.nextInt(description.length)]);
+        int numberOfPhotos = random.nextInt(photos.length);
+        double v = random.nextDouble();
+        for (int i = 0; i < numberOfPhotos; i++) {
+            if (v > 0.5) {
+                builder.photo(photos[i]);
+            }else {
+                builder.photo(photos[photos.length - 1 - i]);
+            }
+        }
+        return builder.build();
+    }
 }
-
-
-
-    //@Id
-    //@GeneratedValue(generator = "UUID")
-    //private UUID uuid;
-    //
-    //
-    //@NotNull
-    //private String title;
-    //
-    //@NotNull
-    //private String subTitle;
-    //
-    //@NotNull
-    //private String mainPhotoUrl;
-    //
-    //@NotNull
-    //@Lob
-    //private String shortDescription;
-    //
-    //@NotNull
-    //@Lob
-    //private String description;
-    //
-    //@Singular
-    //@ElementCollection
-    //@CollectionTable(
-    //        name = "ITEM_PHOTO"
-    //)
-    //private List<String> photos;
