@@ -15,7 +15,7 @@ import { ItemComponent } from './components/buy/item/item.component';
 import { BuySubpageComponent } from './components/buy/buy-subpage/buy-subpage.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         AppRoutingModule,
         MatIconModule,
         MatCardModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        HttpClientModule,
+
     ],
   providers: [],
   bootstrap: [AppComponent]

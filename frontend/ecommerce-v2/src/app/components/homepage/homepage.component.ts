@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ItemStorageService} from "../../services/item/item-storage.service";
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+    selector: 'app-homepage',
+    templateUrl: './homepage.component.html',
+    styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+    constructor(private itemStorageServiceService: ItemStorageService) {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
+    onTest() {
+        this.itemStorageServiceService.fetchItems(0, 16, null, null);
+    }
 }

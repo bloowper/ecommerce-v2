@@ -3,7 +3,9 @@ export class ItemEntity {
 
     constructor(public uuid: string,
                 public title: string,
+                public subTitle: string,
                 public mainPhotoUrl: string,
+                public shortDescription:string,
                 public  description: string,
                 public photos: string[]
     ) {
@@ -11,33 +13,31 @@ export class ItemEntity {
 
 }
 
-// Java related class
-// public class Item {
-//
-//     @Id
-//     @GeneratedValue(generator = "UUID")
-//     private UUID uuid;
+// @Id
+// @GeneratedValue(generator = "UUID")
+// private UUID uuid;
 //
 //
-//     @NotNull
-//     private String title;
+// @NotNull
+// private String title;
 //
-//     @NotNull
-//     private String subTitle;
+// @NotNull
+// private String subTitle;
 //
-//     @NotNull
-//     private String mainPhotoUrl;
+// @NotNull
+// private String mainPhotoUrl;
 //
-//     @NotNull
-//     @Lob
-//     private String description;
+// @NotNull
+// @Lob
+// private String shortDescription;
 //
-//     @Singular
-//     @ElementCollection
-//     @CollectionTable(
-//         name = "ITEM_PHOTO"
-//     )
-//     private List<String> photos;
+// @NotNull
+// @Lob
+// private String description;
 //
-//
-// }
+// @Singular
+// @ElementCollection
+// @CollectionTable(
+//     name = "ITEM_PHOTO"
+// )
+// private List<String> photos;
