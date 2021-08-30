@@ -14,12 +14,13 @@ export class BuySubpageComponent implements OnInit, OnDestroy {
 
 
     itemPageable: ItemPageable | undefined;
-    pageEvent: PageEvent|undefined;
-
 
     constructor(private itemStorageService: ItemStorageService) {
-        //REACTIVE
-        itemStorageService.items$.subscribe(value => {
+
+    }
+
+    ngOnInit(): void {
+        this.itemStorageService.items$.subscribe(value => {
             if (value !== undefined) {
                 this.itemPageable = value;
             }else {
@@ -28,12 +29,12 @@ export class BuySubpageComponent implements OnInit, OnDestroy {
         })
     }
 
-    ngOnInit(): void {
-
-    }
-
     ngOnDestroy(): void {
 
     }
 
+    onChangePage(event: PageEvent) {
+        this.itemStorageService.pageEvent$.next(event);
+        window.scroll(0, 0);
+    }
 }

@@ -2,16 +2,26 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ItemPageable} from "../../entities/ItemPageableEntity";
 import {BehaviorSubject, Subject} from "rxjs";
+import {PageEvent} from '@angular/material/paginator';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class ItemStorageService {
 
-    public items$ = new BehaviorSubject<ItemPageable|undefined>(undefined);
+    public items$ = new BehaviorSubject<ItemPageable | undefined>(undefined);
+    public pageEvent$ = new BehaviorSubject<PageEvent|null>(null);
 
     constructor(private httpClient: HttpClient) {
+        this.pageEvent$.subscribe(event => {
+                if (event) {
+                    this.fetchItems(event.pageIndex,event.pageSize, null, null);
+                }
+            },
+            error => {
 
+            })
     }
 
     public fetchItems(page: number,

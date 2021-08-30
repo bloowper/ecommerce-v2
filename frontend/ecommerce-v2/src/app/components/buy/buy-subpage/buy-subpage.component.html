@@ -1,15 +1,18 @@
 <br/>
 
+
 <div fxLayout="row wrap" fxLayoutAlign="space-evenly center" fxLayoutGap="16px grid">
     <div class="alignItemCenter" *ngFor="let item of itemPageable?.content" fxLayout.gt-lg="20%" fxFlex.gt-md="25%"
          fxFlex.gt-sm="33%" fxFlex.sm="50%">
         <app-item [item]="item"></app-item>
     </div>
 </div>
-
 <br/>
+
 <mat-paginator
     hidePageSize="true"
     [length]="itemPageable?.totalElements"
     [pageSize]="itemPageable?.size"
+    [pageIndex]="itemPageable?.number"
+    (page)="onChangePage($event)"
 ></mat-paginator>
