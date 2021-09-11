@@ -1,21 +1,18 @@
 package orchowski.tomasz.ecommercev2.controllers;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import orchowski.tomasz.ecommercev2.entities.Item;
-import orchowski.tomasz.ecommercev2.mapers.MapperBindingResultToMap;
+import orchowski.tomasz.ecommercev2.mapers.BindingResultToMap;
 import orchowski.tomasz.ecommercev2.services.ItemService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,7 +25,7 @@ import java.util.Optional;
 public class ItemController {
 
     private final ItemService itemService;
-    private final MapperBindingResultToMap bindingResultToMap;
+    private final BindingResultToMap bindingResultToMap;
 
     @GetMapping("/items")
     Page<Item> getItems(
@@ -61,17 +58,11 @@ public class ItemController {
         return ResponseEntity.status(HttpStatus.OK).body(byUuid.get());
     }
 
-    //TODO
-    // Need validation, what should to return when validation fail? Empty body and internal server error?
+
     @PostMapping("/item")
     ResponseEntity<?> newItem(@Valid @RequestBody Item item, BindingResult bindingResult) {
-        //TODO move logic of parsing  to other class
         if (bindingResult.hasErrors()) {
-            Map<Object, Object> errors = new HashMap<>();
-            bindingResult.getAllErrors().forEach(objectError -> {
-                errors.put(objectError.getObjectName(), objectError.getDefaultMessage());
-            });
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResultToMap.convert(bindingResult));
         }
         Item save = itemService.save(item);
         ResponseEntity<Item> response = ResponseEntity.status(HttpStatus.OK).body(save);
