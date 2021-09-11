@@ -16,6 +16,7 @@ import { BuySubpageComponent } from './components/buy/buy-subpage/buy-subpage.co
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { SingleItemComponent } from './components/buy/buy-subpage/singleitem/single-item.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     HomepageComponent,
     ItemComponent,
     BuySubpageComponent,
+    SingleItemComponent,
   ],
     imports: [
         BrowserModule,

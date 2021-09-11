@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ItemService {
@@ -30,4 +32,7 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
+    public Optional<Item> findByUuid(String uuid) {
+        return this.itemRepository.findByUuid(uuid);
+    }
 }

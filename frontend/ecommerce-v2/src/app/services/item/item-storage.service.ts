@@ -10,13 +10,13 @@ import {PageEvent} from '@angular/material/paginator';
 })
 export class ItemStorageService {
 
-    public items$ = new BehaviorSubject<ItemPageable | undefined>(undefined);
-    public pageEvent$ = new BehaviorSubject<PageEvent|null>(null);
+    public items$ = new BehaviorSubject<ItemPageable | undefined>(undefined);//Reactive for requested items
+    public pageEvent$ = new BehaviorSubject<PageEvent | null>(null);//Event for new page request
 
     constructor(private httpClient: HttpClient) {
         this.pageEvent$.subscribe(event => {
                 if (event) {
-                    this.fetchItems(event.pageIndex,event.pageSize, null, null);
+                    this.fetchItems(event.pageIndex, event.pageSize, null, null);
                 }
             },
             error => {
@@ -41,9 +41,10 @@ export class ItemStorageService {
             params = params.set("sortDirection", sortDirection);
         }
         //TODO externalize API
-        this.httpClient.get<ItemPageable>("http://localhost:8080/ecommerce/api/items", {
-            params: params
-        }).subscribe(
+        this.httpClient.get<ItemPageable>("http://localhost:8080/ecommerce/api/items",
+            {
+                params: params
+            }).subscribe(
             value => {
                 console.log(value)
                 this.items$.next(value);
@@ -52,6 +53,10 @@ export class ItemStorageService {
                 console.log(error);
                 this.items$.next(error);
             });
+    }
+
+    public fetchSingleItem(uuid: string) {
+
     }
 }
 

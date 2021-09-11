@@ -1,7 +1,9 @@
 
 
 <mat-card >
-    <img mat-card-image [src]="item?.mainPhotoUrl" alt="image">
+    <a [routerLink]="['/item']" [queryParams]="{uuid : item?.uuid}">
+        <img  style="cursor: pointer" mat-card-image [src]="item?.mainPhotoUrl" alt="image">
+    </a>
     <mat-card-header>
         <mat-card-title>{{item?.title}}</mat-card-title>
         <!--<mat-card-subtitle>Subtitle</mat-card-subtitle>-->
