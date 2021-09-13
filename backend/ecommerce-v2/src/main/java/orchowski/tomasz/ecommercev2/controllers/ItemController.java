@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("${api.prefix}")
@@ -47,20 +48,23 @@ public class ItemController {
     }
 
 
-    @GetMapping("/item")
-    ResponseEntity<Item> getItem(
-            @RequestParam(required = true) String uuid
+    @GetMapping("/item/{uuid}")
+    ResponseEntity<?> getItem(
+            @PathVariable(required = true) UUID uuid
     ) {
         Optional<Item> byUuid = itemService.findByUuid(uuid);
         if (byUuid.isEmpty()) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("error", "resource not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(byUuid.get());
         }
-        return ResponseEntity.status(HttpStatus.OK).body(byUuid.get());
     }
 
 
     @PostMapping("/item")
-    ResponseEntity<?> newItem(@Valid @RequestBody Item item, BindingResult bindingResult) {
+    ResponseEntity<?> postItem(@Valid @RequestBody Item item, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResultToMap.convert(bindingResult));
         }
