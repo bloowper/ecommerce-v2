@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
@@ -32,22 +34,26 @@ public class Item {
     private Timestamp updateDate;
 
     @NotNull
-    @Size(min = 4)
+    @Size(min = 4,max = 255)
     private String title;
 
     @NotNull
+    @Size(min = 4,max = 255)
     private String subTitle;
 
     @NotNull
+    @Size(max = 255)
     private String mainPhotoUrl;
 
     @NotNull
-    @Lob
+    @Size(min = 4,max = 500)
     private String shortDescription;
 
     @NotNull
     @Lob
+    @Size(min = 4,max = 3000)
     private String description;
+
 
     @Singular
     @ElementCollection
