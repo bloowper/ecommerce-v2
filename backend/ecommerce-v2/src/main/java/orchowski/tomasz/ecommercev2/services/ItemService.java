@@ -33,7 +33,7 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public Optional<Item> findByUuid(UUID uuid) {
-        return this.itemRepository.findByUuid(uuid);
+    public Optional<Item> findById(int id) {
+        return this.itemRepository.findById(id);
     }
 }

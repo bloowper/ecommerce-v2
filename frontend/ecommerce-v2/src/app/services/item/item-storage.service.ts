@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {ItemPageable} from "../../entities/ItemPageableEntity";
 import {BehaviorSubject, Subject} from "rxjs";
 import {PageEvent} from '@angular/material/paginator';
+import {ItemEntity} from "../../entities/ItemEntity";
 
 
 @Injectable({
@@ -55,8 +56,21 @@ export class ItemStorageService {
             });
     }
 
-    public fetchSingleItem(uuid: string) {
+    public fetchSingleItem(id: string) {
+        const httpParams = new HttpParams();
+        httpParams.set("id", id);
+        this.httpClient
+            .get<ItemEntity>(
+            "http://localhost:8080/ecommerce/api/items",
+        {params : httpParams})
+            .subscribe(
+            value => {
 
+            }   ,
+            error => {
+                
+            }
+            )
     }
 }
 

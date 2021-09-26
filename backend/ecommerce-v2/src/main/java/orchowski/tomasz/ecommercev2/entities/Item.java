@@ -23,8 +23,8 @@ import java.util.UUID;
 public class Item {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @CreationTimestamp
     @Column(updatable = false)

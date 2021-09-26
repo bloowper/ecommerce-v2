@@ -11,5 +11,5 @@ import java.util.UUID;
 @Repository
 public interface ItemRepository extends JpaRepository<Item,Long> {
 
-   Optional<Item>  findByUuid(UUID uuid);
+   Optional<Item> findById(int id);
 }

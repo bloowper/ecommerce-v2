@@ -50,9 +50,9 @@ public class ItemController {
 
     @GetMapping("/item/{uuid}")
     ResponseEntity<?> getItem(
-            @PathVariable(required = true) UUID uuid
+            @PathVariable(required = true) int id
     ) {
-        Optional<Item> byUuid = itemService.findByUuid(uuid);
+        Optional<Item> byUuid = itemService.findById(id);
         if (byUuid.isEmpty()) {
             Map<String, Object> responseBody = new HashMap<>();
             responseBody.put("error", "resource not found");
@@ -71,6 +71,11 @@ public class ItemController {
         Item save = itemService.save(item);
         ResponseEntity<Item> response = ResponseEntity.status(HttpStatus.OK).body(save);
         return response;
+    }
+
+    @DeleteMapping("/item/{uuid}")
+    ResponseEntity<?> deleteItem(@PathVariable(required = true) UUID uuid) {
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
 
