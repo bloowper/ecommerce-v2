@@ -38,9 +38,11 @@ public class BootstrapDb implements CommandLineRunner {
     private final SetConstraintViolationToMap setConstraintViolationToMap;
 
     //variables for random behaviour
+    // Items
     public int nOfRandomItems = 46;
     public ArrayList<Item> items = new ArrayList<>(nOfRandomItems);
 
+    // Users
 
     @Override
     public void run(String... args) throws Exception {

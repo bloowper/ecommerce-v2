@@ -21,9 +21,9 @@ public class ItemService {
 
        PageRequest pageRequest;
        if (direction == Sort.Direction.ASC) {
-           pageRequest = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+           pageRequest = PageRequest.of(page, size, Sort.by(sortBy).ascending().and(Sort.by("id").ascending()));
        } else {
-           pageRequest = PageRequest.of(page, size, Sort.by(sortBy).descending());
+           pageRequest = PageRequest.of(page, size, Sort.by(sortBy).descending().and(Sort.by("id").ascending()));
        }
 
        return itemRepository.findAll(pageRequest);
@@ -35,5 +35,9 @@ public class ItemService {
 
     public Optional<Item> findById(int id) {
         return this.itemRepository.findById(id);
+    }
+
+    public void deleteAllById(Iterable<Integer> ids) {
+        itemRepository.deleteAllById(ids);
     }
 }

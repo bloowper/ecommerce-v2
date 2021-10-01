@@ -13,10 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("${api.prefix}")
@@ -48,7 +45,7 @@ public class ItemController {
     }
 
 
-    @GetMapping("/item/{uuid}")
+    @GetMapping("/item/{id}")
     ResponseEntity<?> getItem(
             @PathVariable(required = true) int id
     ) {
@@ -73,8 +70,10 @@ public class ItemController {
         return response;
     }
 
-    @DeleteMapping("/item/{uuid}")
-    ResponseEntity<?> deleteItem(@PathVariable(required = true) UUID uuid) {
+    @DeleteMapping("/item")
+    ResponseEntity<?> deleteItem(@RequestParam(required = true) List<Integer> id) {
+        log.info("Removing Item with id"+ id);
+        itemService.deleteAllById(id);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
