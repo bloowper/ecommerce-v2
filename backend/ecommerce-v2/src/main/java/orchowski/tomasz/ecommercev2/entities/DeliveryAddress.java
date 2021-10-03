@@ -1,7 +1,9 @@
 package orchowski.tomasz.ecommercev2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeliveryAddress {
@@ -20,11 +23,13 @@ public class DeliveryAddress {
     Integer id;
 
     @ManyToOne
+    @JsonIgnore
     StoreUser storeUser;
 
     @OneToMany(
             mappedBy = "deliveryAddress"
     )
+    @JsonIgnore
     List<Order> orderList;
 
     String firstName;
